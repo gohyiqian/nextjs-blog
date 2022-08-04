@@ -8,7 +8,13 @@ const name = 'Kenji Goh';
 
 export const siteTitle = 'Kenji Portfolio';
 
-export default function Layout({ children, home }) {
+export default function Layout({
+  children,
+  home,
+}: {
+  children: React.ReactNode;
+  home?: boolean;
+}) {
   return (
     <div className={styles.container}>
       <Head>

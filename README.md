@@ -20,6 +20,10 @@ npm install classnames
 npm install -D tailwindcss autoprefixer postcss
 npm install -D sass
 npm install swr
+touch tsconfig.json
+npm install --save-dev typescript @types/react @types/node
+//ensures Next.js types are picked up by the TypeScript compiler.
+touch next-env.d.ts
 ```
 
 Next.js compiles CSS using `PostCSS.`

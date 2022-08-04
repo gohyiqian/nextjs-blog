@@ -5,8 +5,9 @@ import utilStyles from '../styles/utils.module.css';
 import Alert from '../components/alert';
 import { getSortedPostsData, getRandomData } from '../lib/posts';
 import Date from '../components/date';
+import { GetStaticProps } from 'next';
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   const randomData = await getRandomData();
 
@@ -16,10 +17,17 @@ export async function getStaticProps() {
       randomData,
     },
   };
-}
+};
 
-const Home = ({ allPostsData, randomData }) => {
-  console.log(randomData);
+const Home = ({
+  allPostsData,
+}: {
+  allPostsData: {
+    date: string;
+    title: string;
+    id: string;
+  }[];
+}) => {
   return (
     <div className="container">
       <Layout home>

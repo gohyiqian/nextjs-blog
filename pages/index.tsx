@@ -6,11 +6,11 @@ import Alert from '../components/alert';
 import { getSortedPostsData, getRandomData } from '../lib/posts';
 import Date from '../components/date';
 import { GetStaticProps } from 'next';
+import useSWR from 'swr';
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   const randomData = await getRandomData();
-
   return {
     props: {
       allPostsData,
@@ -28,6 +28,12 @@ const Home = ({
     id: string;
   }[];
 }) => {
+  const fetcher = (apiURL: string) => fetch(apiURL).then((res) => res.json());
+  const { data, error } = useSWR('/api/posts', fetcher);
+  if (error) <p>Loading failed...</p>;
+  if (!data) <h1>Loading...</h1>;
+  console.log(`data`, data);
+
   return (
     <div className="container">
       <Layout home>
@@ -36,13 +42,20 @@ const Home = ({
         </Head>
         <Alert type={'success'}>Hi all</Alert>
         <section className={utilStyles.headingMd}>
-          <p>[Your Self Introduction]</p>
           <p>
-            (This is a sample website - you’ll be building a site like this on{' '}
-            <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
+            A Passionate Full Stack Developer with working experience using
+            React, TypeScript, Redux, Serverless Framework and various AWS Cloud
+            Services.
           </p>
         </section>
-        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <section className={utilStyles.headingMd}>
+          <code>
+            A Passionate Full Stack Developer with working experience using
+            React, TypeScript, Redux, Serverless Framework and various AWS Cloud
+            Services.
+          </code>
+        </section>
+        {/* <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
           <h2 className={utilStyles.headingLg}>Blog</h2>
           <ul className={utilStyles.list}>
             {allPostsData.map(({ id, date, title }) => (
@@ -57,17 +70,17 @@ const Home = ({
               </li>
             ))}
           </ul>
-        </section>
+        </section> */}
       </Layout>
       <main>
         <h1 className="title">
-          Hi I am <a href="https://nextjs.org">Kenji Goh</a>
+          Hi I am <a href="/posts/first-post">Kenji Goh</a>
         </h1>
 
         <h1 className="title">
-          Read{' '}
-          <Link href="/posts/first-post">
-            <a>this page!</a>
+          Full Stack Developer
+          <Link href="https://www.gic.com.sg/">
+            <a> @GIC</a>
           </Link>
         </h1>
 
@@ -76,6 +89,28 @@ const Home = ({
         </p>
 
         <div className="grid">
+          {data &&
+            data.map((item) => {
+              <a href="https://nextjs.org/docs" className="card">
+                <h3>{item.title} &rarr;</h3>
+                <p>{item.content}</p>
+              </a>;
+            })}
+        </div>
+        <div className="grid">
+          {allPostsData.map(({ id, date, title }) => (
+            <div className="card" key={id}>
+              <Link href={`/posts/${id}`}>
+                <a>{title}</a>
+              </Link>
+              <br />
+              <small className={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
+            </div>
+          ))}
+        </div>
+        {/* <div className="grid">
           <a href="https://nextjs.org/docs" className="card">
             <h3>Documentation &rarr;</h3>
             <p>Find in-depth information about Next.js features and API.</p>
@@ -103,7 +138,7 @@ const Home = ({
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
-        </div>
+        </div> */}
       </main>
       <footer>
         <a

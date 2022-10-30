@@ -3,18 +3,16 @@ import Link from 'next/link';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import Alert from '../components/alert';
-import { getSortedPostsData, getRandomData } from '../lib/posts';
+import { getSortedPostsData } from '../lib/posts';
 import Date from '../components/date';
 import { GetStaticProps } from 'next';
 import useSWR from 'swr';
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
-  const randomData = await getRandomData();
   return {
     props: {
       allPostsData,
-      randomData,
     },
   };
 };
@@ -44,33 +42,10 @@ const Home = ({
         <section className={utilStyles.headingMd}>
           <p>
             A Passionate Full Stack Developer with working experience using
-            React, TypeScript, Redux, Serverless Framework and various AWS Cloud
-            Services.
+            <code>React, TypeScript, Redux, Serverless Framework</code> and
+            various AWS Cloud Services.
           </p>
         </section>
-        <section className={utilStyles.headingMd}>
-          <code>
-            A Passionate Full Stack Developer with working experience using
-            React, TypeScript, Redux, Serverless Framework and various AWS Cloud
-            Services.
-          </code>
-        </section>
-        {/* <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <h2 className={utilStyles.headingLg}>Blog</h2>
-          <ul className={utilStyles.list}>
-            {allPostsData.map(({ id, date, title }) => (
-              <li className={utilStyles.listItem} key={id}>
-                <Link href={`/posts/${id}`}>
-                  <a>{title}</a>
-                </Link>
-                <br />
-                <small className={utilStyles.lightText}>
-                  <Date dateString={date} />
-                </small>
-              </li>
-            ))}
-          </ul>
-        </section> */}
       </Layout>
       <main>
         <h1 className="title">
@@ -79,13 +54,12 @@ const Home = ({
 
         <h1 className="title">
           Full Stack Developer
-          <Link href="https://www.gic.com.sg/">
-            <a> @GIC</a>
-          </Link>
+          <Link href="https://www.gic.com.sg/">@GIC</Link>
         </h1>
 
         <p className="description">
-          Get started by editing <code>pages/index.js</code>
+          I document my learning in this blog for sharing
+          <code>pages/index.js</code>
         </p>
 
         <div className="grid">
@@ -100,9 +74,7 @@ const Home = ({
         <div className="grid">
           {allPostsData.map(({ id, date, title }) => (
             <div className="card" key={id}>
-              <Link href={`/posts/${id}`}>
-                <a>{title}</a>
-              </Link>
+              <Link href={`/posts/${id}`}>{title}</Link>
               <br />
               <small className={utilStyles.lightText}>
                 <Date dateString={date} />
@@ -110,35 +82,6 @@ const Home = ({
             </div>
           ))}
         </div>
-        {/* <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div> */}
       </main>
       <footer>
         <a
@@ -206,7 +149,7 @@ const Home = ({
         .title {
           margin: 0;
           line-height: 1.15;
-          font-size: 4rem;
+          font-size: 2rem;
         }
 
         .title,

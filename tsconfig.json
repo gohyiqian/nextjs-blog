@@ -1,8 +1,11 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -10,19 +13,18 @@
     "noEmit": true,
     "incremental": true,
     "esModuleInterop": true,
-    "moduleResolution": "Node",
     "module": "esnext",
-    // "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
-    "resolveJsonModule": true
-    //"module": "commonjs", //for next and express to work tgt
-    //"compilerOptions.noEmit": true
+    "jsx": "preserve"
   },
-  "baseUrl": ".",
-  "paths": {
-    "@/*": ["src/*"]
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "server"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -39,29 +39,12 @@ export function getSortedPostsData() {
   });
 }
 
-export async function getRandomData() {
-  const res = await fetch('https://randomuser.me/api/');
-  const data = await res.json();
-  return data;
-}
-
 // return the list of file names (excluding .md) in the posts directory
 export function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory);
 
   // Returns an array that looks like this:
-  // [
-  //   {
-  //     params: {
-  //       id: 'ssg-ssr'
-  //     }
-  //   },
-  //   {
-  //     params: {
-  //       id: 'pre-rendering'
-  //     }
-  //   }
-  // ]
+  // [{params: {id: 'ssg-ssr'},},{params: {id: 'pre-rendering',},},];
   return fileNames.map((fileName) => {
     return {
       params: {

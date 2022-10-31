@@ -2,12 +2,10 @@
 
 import '../styles/global.css';
 import { AppProps } from 'next/app';
-import ReadingBar from '../components/ReadingBar';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <ReadingBar />
       <Component {...pageProps} />
     </>
   );
